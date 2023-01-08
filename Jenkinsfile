@@ -20,6 +20,17 @@ pipeline
 			}
 		}		
 	}
+	post{
+		always{
+			echo "***** Always Excuted *****"	
+		}
+		success{
+			echo "***** Excuted on Pipeline Success*****"	
+		}
+		failure{
+			echo "***** Excuted on Pipeline Failure*****"	
+		}
+	}
 }
 
 //SCRIPTED PIPELINE 
