@@ -8,6 +8,7 @@ pipeline
 	environment{
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
+		PATH_ORG = "$PATH"
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
 
@@ -19,6 +20,7 @@ pipeline
 				sh 'mvn --version'
 				sh "docker --version"
 
+				echo "PATH_ORG - $PATH_ORG"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"	
 				echo "BUILD_ID - $env.BUILD_ID"
