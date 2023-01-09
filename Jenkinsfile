@@ -17,14 +17,14 @@ pipeline
 			steps{
 				echo "Build***************"
 				sh 'mvn --version'
-				sh 'docker --version'
+				sh "docker --version"
 
-				echo 'PATH - $PATH'
-				echo 'BUILD_NUMBER - $env.BUILD_NUMBER'	
-				echo 'BUILD_ID - $env.BUILD_ID'
-				echo 'BUILD_TAG - $env.BUILD_TAG'	
-				echo 'BUILD_URL - $env.BUILD_URL'	
-				echo 'JOB_NAME - $env.JOB_NAME'		
+				echo "PATH - $PATH"
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"	
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "BUILD_TAG - $env.BUILD_TAG"	
+				echo "BUILD_URL - $env.BUILD_URL"	
+				echo "JOB_NAME - $env.JOB_NAME"
 
 			}
 		}
