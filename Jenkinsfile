@@ -2,12 +2,30 @@
 //DECLERATIVE 
 pipeline
  {
-	// agent any
-	agent { docker {image 'node:14-alpine3.17' } }
+	agent any
+	//agent { docker {image 'node:14-alpine3.17' } }
+
+	environment{
+		dockerHome = tool "myDocker"
+		mavenHome = tool "myMaven"
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
+
+
 	stages{
 		stage('Stage Build'){
 			steps{
-				echo "Build"
+				echo "Build***************"
+				sh 'maven --version'
+				sh 'docker --version'
+
+				echo 'PATH - $PATH'
+				echo 'BUILD_NUMBER - $env.BUILD_NUMBER'	
+				echo 'BUILD_ID - $env.BUILD_ID'
+				echo 'BUILD_TAG - $env.BUILD_TAG'	
+				echo 'BUILD_URL - $env.BUILD_URL'	
+				echo 'JOB_NAME - $env.JOB_NAME'		
+
 			}
 		}
 		stage('Stage Test'){
