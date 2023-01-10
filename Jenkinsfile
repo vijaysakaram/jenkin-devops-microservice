@@ -29,25 +29,55 @@ pipeline
 			}
 		}
 
-		stage('****************** Stage Compile ******************'){
+		stage('Compile'){
 			steps{
 				sh "mvn clean compile"
 			}
 		}
 
-		stage('****************** Stage Execute Unit Test ******************'){
+		stage('Execute Unit Test'){
 			steps{
 				sh "mvn test"
 			}
 		}
 
-		stage('****************** Stage Integration Test ******************'){
+		stage('Integration Test'){
 			steps{
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
-		}		
+		}	
+
+		//Build Jar
+		stage('Package'){
+			steps{
+				sh "mvn package -DskipTests"
+			}
+		}				
+
+		stage('Build Docker Image'){
+			steps{
+				//Declerative method
+				//"build -t vijaysakaram/currency-exchange-devops:$env.BUILD_TAG"
+
+				script{
+					dockerImage = docker.build("vijaysakaram/currency-exchange-devops:${env.BUILD_TAG}")
+				}
+			}
+		}
+
+		stage('Push Docker Image'){
+			steps{
+				script{
+					docker.withRegistry('','dockerhub');{
+						dockerImage.Push();
+						dockerImage.Push('latest');
+					}
+				}
+			}
+		}
 
 	}
+
 	post{
 		always{
 			echo "***** Always Excuted *****"	
