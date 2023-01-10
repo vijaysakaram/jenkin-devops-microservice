@@ -67,15 +67,15 @@ pipeline
 
 		stage('Push Docker Image'){
 			steps{
-
-				docker.withRegistry('https://hub.docker.com/vijaysakaram', 'dockerhub') {
-				dockerImage.push()
+				script{
+					docker.withRegistry('https://hub.docker.com/vijaysakaram', 'dockerhub') {
+					dockerImage.push()
 
 				// script{
 				// 	docker.withRegistry('','dockerhub'){
 				// 		dockerImage.Push();
 				// 		dockerImage.Push('latest');
-				// 	}
+				 	}
 				}
 			}
 		}
